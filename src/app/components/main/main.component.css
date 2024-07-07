@@ -1,0 +1,55 @@
+.tabs-container {
+  margin-bottom: 20px;
+}
+
+.nav-pills .nav-link {
+  margin-bottom: 5px;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-list-img {
+  margin: 20px;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.card-grid-img {
+  width: 100%;
+  height: 400px;
+  cursor: pointer;
+}
+
+.card-title input {
+  width: 100%;
+}
+
+.input-group .form-control {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.input-group .btn {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.btn {
+  margin-right: 10px;
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
+}
+.nav-item {
+  width: max-content;
+}
+
+.nav-pills .nav-link {
+  cursor: pointer;
+}

@@ -1,0 +1,116 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-4 mt-5">
+      <div class="tabs-container mt-2">
+        <ul class="nav flex-column nav-pills">
+          <li class="nav-item" *ngFor="let tab of tabNames">
+            <a
+              class="nav-link"
+              [class.active]="tab === selectedTab"
+              (click)="selectTab(tab)"
+            >
+              {{ tab }} ({{ splittedData[tab].length }})
+            </a>
+          </li>
+        </ul>
+        <button class="btn btn-primary mt-3" (click)="toggleView()">
+          Change View
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="d-flex mb-3">
+        <div class="input-group" style="width: 300px">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search field"
+            [(ngModel)]="searchTerm"
+            (input)="search()"
+          />
+          <button class="btn btn-danger" (click)="clearSearch()">Clear</button>
+        </div>
+        <button class="btn btn-secondary" (click)="refreshData()">
+          Refresh
+        </button>
+        <button class="btn btn-info" (click)="toggleSortDirection()">
+          Sort {{ sortDirection === "asc" ? "Asc" : "Desc" }}
+        </button>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- הצגת נתונים לפי סוג נבחר -->
+      <div class="row" *ngIf="view === 'list'">
+        <div class="col-12" *ngFor="let item of filteredData">
+          <div class="card mb-3 card-list">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img
+                  *ngIf="item.Poster && item.Poster !== 'N/A'"
+                  [src]="item.Poster"
+                  class="card-img-top card-list-img"
+                  alt="Poster"
+                  (click)="goToItem(item.id)"
+                  (error)="handleImageError($event)"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <span *ngIf="!editing" (click)="editTitle(item)">{{
+                      item.Title
+                    }}</span>
+                    <input
+                      *ngIf="editing"
+                      [(ngModel)]="item.Title"
+                      (blur)="saveTitle(item)"
+                      (keyup.enter)="saveTitle(item)"
+                    />
+                  </h5>
+                  <p class="card-text">
+                    <small class="text-muted">{{ item.year }}</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="view === 'grid'">
+        <div class="col-md-4" *ngFor="let item of filteredData">
+          <div class="card mb-3 card-grid">
+            <img
+              *ngIf="item.Poster && item.Poster !== 'N/A'"
+              [src]="item.Poster"
+              class="card-img-top card-grid-img"
+              alt="Poster"
+              (click)="goToItem(item.id)"
+              (error)="handleImageError($event)"
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                <span *ngIf="!editing" (click)="editTitle(item)">{{
+                  item.Title
+                }}</span>
+                <input
+                  *ngIf="editing"
+                  [(ngModel)]="item.Title"
+                  (blur)="saveTitle(item)"
+                  (keyup.enter)="saveTitle(item)"
+                />
+              </h5>
+              <p class="card-text">
+                <small class="text-muted">{{ item.year }}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

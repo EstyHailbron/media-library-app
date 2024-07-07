@@ -1,0 +1,22 @@
+<div *ngIf="item" class="container m-5">
+  <button class="btn btn-secondary mb-3" routerLink="/">back</button>
+  <div class="card mx-auto" style="max-width: 600px">
+    <img
+      *ngIf="item.Poster !== 'N/A'"
+      [src]="item.Poster"
+      class="card-img-top"
+      alt="Poster"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ item.Title }}</h5>
+      <p class="card-text">
+        <strong>Year:</strong> {{ item.Year }}<br />
+        <strong>Type:</strong> {{ item.Type }}<br />
+        <strong>IMDB ID:</strong> {{ item.imdbID }}<br />
+      </p>
+      <p class="card-text">
+        <small class="text-muted">{{ item.Type }}</small>
+      </p>
+    </div>
+  </div>
+</div>
